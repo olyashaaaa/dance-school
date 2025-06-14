@@ -1,0 +1,820 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+
+body {
+    
+    color: white;
+    background: black;
+}
+
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 50px;
+    align-items: center;
+    
+}
+
+.logo img {
+    height: 50px; /* Размер логотипа */
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    padding-left: 50px;
+    background-image: url(img/in1.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    /* transition: transform 1s ease, opacity 1s ease;
+    transform: translateY(100%); */
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+}
+
+
+.star-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Каждая «звёздочка» */
+.star {
+  position: absolute;
+  bottom: -5px;            /* старт чуть ниже контейнера */
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  opacity: 0;
+  /* ширина/высота звезды зададим через JS */
+  animation-name: rise;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+/* Класс «свечения» */
+.star.glow {
+  /* Дополнительный яркий бордюр и рассеянное свечение */
+  box-shadow:
+    0 0 4px rgba(255,255,200,0.8),
+    0 0 8px rgba(255,255,200,0.6),
+    0 0 12px rgba(178,32,83,100);
+  animation-name: glowPulse, rise;  /* объединяем пульс и подъём */
+  animation-duration: 2s, var(--rise-duration);
+  animation-iteration-count: infinite, infinite;
+  animation-timing-function: ease-in-out, linear;
+}
+
+/* Анимация пульса свечения */
+@keyframes glowPulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+/* Ключевые кадры: появление → подъём → исчезание */
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+h1 {
+    font-size: 96px;
+    font-weight: bold;
+}
+
+p {
+    font-size: 20px;
+    margin: 20px 0;
+    line-height: 1.5;
+}
+
+.btn1 {
+    display: inline-block;
+    padding: 15px 30px;
+    background: #D91A5C;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 2px;
+    font-size: 16px;
+}
+
+/* info */
+
+.write{
+background-color: white;
+color: black;
+}
+.info {
+    background-image: url(img/Group\ 6.svg);
+    background-position: 46% 86%;
+    background-repeat: no-repeat;
+    background-size: 300px;
+    display: flex;
+    padding: 30px;
+    justify-content: space-between;
+}
+
+.block_1 {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    text-align: right;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 500px;
+    font-family: 'Montserrat';
+}
+
+.h3 {
+    font-size: 32px;
+    font-family: 'Montserrat';
+}
+
+.p {
+    font-size: 24px;
+    font-family: 'Montserrat';
+}
+
+.photo>img {
+    width: 80%;
+}
+
+.block_2 {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+/* record */
+.record {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-image: url(img/DSC_0335\ \(2\)-105\ 1.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    min-height: 560px;
+    align-items: center;
+    justify-content: center;
+}
+
+.button2 {
+    border: 2px solid #fff;
+    text-align: center;
+    max-width: 300px;
+    color: #fff;
+    padding: 20px 40px;
+    font-size: 32px;
+    font-family: 'Montserrat';
+}
+
+.button2:hover {
+    color: #323232;
+    background-color: #fff;
+}
+
+.h11{
+    font-size: 61px;
+}
+
+.h22{
+    font-size: 30px;
+    text-align: center;
+}
+
+
+.teacher {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 0;
+    align-items: center;
+    font-family: 'Montserrat';
+}
+
+.part {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 80px;
+    font-family: 'Montserrat';
+}
+
+.photo_t>img {
+    width: 100%;
+}
+
+.info_part {
+    max-width: 790px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat';
+}
+
+.fio {
+    font-size: 48px;
+    font-family: 'Montserrat';
+}
+
+.job {
+    font-size: 32px;
+    color: #B22053;
+}
+
+.info_job {
+    font-size: 24px;
+    font-family: 'Montserrat';
+}
+
+
+/* 
+стоимость */
+.photo1{
+    background-image: url(img/image\ 9\ \(2\).png);
+}
+.pricing {
+        padding-top: 9px;
+        padding-left: 100px;
+        max-width: 1000px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container h1 {
+        text-transform: uppercase;
+        font-size: 96px;
+        font-weight: 600;
+    }
+
+    .cards {
+        padding-top: 20px;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    .card_pink {
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(178, 32, 83, 0.8);
+        width: 581px;
+        height: 754px;
+        border-radius: 14px;
+        padding: 5% 7%;
+    }
+
+    .card_pink h2 {
+   
+        font-size: 36px;
+        color: #fff;
+    }
+
+    .card_pink p {
+     
+        font-weight: 300;
+        font-size: 24px;
+        padding-top: 20px;
+        color: #fff;
+    }
+
+    .labels {
+        padding-top: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        color: #fff;
+    }
+
+    .inp {
+        padding: 3%;
+        width: 492px;
+        height: 90px;
+        align-items: center;
+        justify-content: center;
+    
+        font-size: 24px;
+        font-weight: 300;
+        background-color: #B22053;
+        color: #fff;
+        border: #fff 2px solid;
+    }
+
+    .inp:focus {
+        outline: none;
+        box-shadow: none;
+        color: #fff;
+    }
+
+    .button {
+        padding-top: 22px;
+        text-align: center;
+    }
+
+    .btn {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    
+        width: 270px;
+        min-height: 60px;
+        border: 0;
+        background-color: #ffffff;
+        color: #000000;
+        font-size: 24px;
+    }
+
+    .card2 {
+        
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .card2 h1 {
+        margin: 0;
+        text-transform: uppercase;
+        font-size: 96px;
+        font-weight: 600;
+    }
+
+    
+
+    .price_cards {
+        
+        display: flex;
+        flex-direction: row;
+        gap: 17px;
+    }
+
+    .price_card {
+        background-color: #fff;
+        width: 248px;
+        height: 236px;
+        position: relative;
+        padding: 20px;
+        border-radius: 14px;
+        color: #000;
+    }
+
+    .price_card h2 {
+       
+        font-weight: 500;
+        font-size: 36px;
+    }
+
+    .price_card p {
+       
+        font-weight: 300;
+        font-size: 24px;
+    }
+
+    /* Стили кнопки */
+.add-button {
+  cursor: pointer;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #B22053;
+  color: white;
+  border-radius: 50%;
+  user-select: none;
+  margin: 20px;
+}
+
+.add-button:hover {
+  background: #B22053;
+}
+
+/* общий стиль модального оверлея */
+.modal {
+  position: fixed;
+  inset: 0;               /* shorthand для top/left/right/bottom = 0 */
+  background: rgba(0,0,0,0.5);
+  display: none;          /* скрыт по умолчанию */
+  justify-content: center;/* горизонтальный центр */
+  align-items: center;    /* вертикальный центр */
+  z-index: 1000;
+}
+
+/* когда нужно показать — добавляем класс .open */
+.modal.open {
+  display: flex;
+}
+
+/* контент внутри модалки */
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;             /* горизонтальный флекс */
+  flex-direction: row;       /* по-горизонтали */
+  gap: 20px;                 /* отступы между блоками */
+  max-width: 90%;
+  color: #000000;
+  max-height: 90%;
+  overflow-y: auto;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  position: relative;        /* для крестика */
+}
+
+/* крестик */
+.modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Стиль кнопки */
+.add-button1 {
+  cursor: pointer;
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #B22053;
+  color: white;
+  border-radius: 50%;
+  margin: 20px;
+  user-select: none;
+}
+
+.add-button1:hover {
+  background: #B22053;
+}
+
+
+
+/* Блоки с информацией */
+.price-block {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  border-left: 4px solid #3498db;
+}
+
+.payment-info {
+  background: #e8f4fc;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+.notes {
+  background: #fff8e1;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  color: #5d4037;
+}
+
+h2 {
+  color: #2c3e50;
+  margin-top: 0;
+}
+
+.H1{
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 50px;
+text-align: center;
+margin-top: 60px;
+}
+
+    
+.reviews-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.review {
+    background-color: rgba(178, 32, 83, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+    text-align: center;
+}
+.review img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+.review h3 {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+.review p {
+    font-size: 0.95em;
+}
+
+
+.button3 {
+display: flex;
+justify-content: center;
+margin-top: 50px;
+margin-left: 580px;
+align-items: center;
+background-color: #FFFFFF;
+color: #B22053;
+border-radius: 18px;
+width: 327px;
+height: 83px;
+}
+
+
+
+.address-section {
+    margin-top: 50px;
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+   
+}
+
+
+.map-container {
+    border: 5px solid #c04b69;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+ justify-content: center;
+    margin-top: 20px;
+}
+.map-container iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+}
+
+.address {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
+
+
+/* футер */
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #B22053;
+    color: #ffffff;
+    width: 1400px;
+    margin-left: 37px;
+    border-radius: 20px;
+}
+
+.logo1{
+width: 150px;
+height: 150px;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-content ul {
+    list-style: none;
+    gap: 10px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.footer-content ul li {
+    display: inline;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.footer-content ul li a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.footer-left .logo {
+    max-width: 100px; /* Установите желаемый размер логотипа */
+}
+
+.footer-center {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    margin-top: 150px;
+    gap: 8px;
+    color: #ffffff;
+}
+
+.footer-center .social-media {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 15px; /* Отступ между элементами */
+    color: #ffffff;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+.write1{
+    background-color: white;
+    color: black;
+    }
+
+  /* Стили для уведомления об успешной отправке */
+      .success-notification {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        z-index: 10000;
+        display: none;
+        max-width: 400px;
+        width: 90%;
+      }
+
+      .success-notification.show {
+        display: block;
+        animation: slideInScale 0.5s ease-out;
+      }
+
+      .success-notification h2 {
+        color: #B22053;
+        margin-bottom: 20px;
+        font-size: 2em;
+      }
+
+      .success-notification p {
+        color: #666;
+        font-size: 1.1em;
+        margin-bottom: 30px;
+        line-height: 1.6;
+      }
+
+      .success-notification .close-btn {
+        background: linear-gradient(45deg, #B22053, #764ba2);
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .success-notification .close-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        z-index: 9999;
+        display: none;
+      }
+
+      .overlay.show {
+        display: block;
+      }
+
+      /* Анимация появления */
+      @keyframes slideInScale {
+        0% {
+          transform: translate(-50%, -50%) scale(0.5);
+          opacity: 0;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* Стили для фейерверков */
+      .fireworks {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9998;
+      }
+
+      .firework {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        animation: fireworkExplode 1.5s ease-out forwards;
+      }
+
+      @keyframes fireworkExplode {
+        0% {
+          transform: translate(0, 0) scale(1);
+          opacity: 1;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          transform: translate(var(--end-x, 0), var(--end-y, 0)) scale(0.5);
+          opacity: 0;
+        }
+      }
+
+      .firework:nth-child(1) { background: #ff6b6b; }
+      .firework:nth-child(2) { background: #4ecdc4; }
+      .firework:nth-child(3) { background: #45b7d1; }
+      .firework:nth-child(4) { background: #f9ca24; }
+      .firework:nth-child(5) { background: #f0932b; }
+      .firework:nth-child(6) { background: #eb4d4b; }
+      .firework:nth-child(7) { background: #6c5ce7; }
+      .firework:nth-child(8) { background: #a29bfe; }
+
+      

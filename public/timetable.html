@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Танцевальная студия</title>
+    <link rel="stylesheet" href="time.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+   <header>
+      <nav>
+        <a href="index.html" class="logo">
+          <img src="img/ic1.png" alt="Логотип" />
+        </a>
+        <ul class="nav-links">
+          <li><a href="prepod.html">Преподаватели</a></li>
+          <li><a href="new.html">Наша галерея</a></li>
+          <li><a href="new.html">Новости</a></li>
+          <li><a href="reviews.html">Отзывы</a></li>
+          <li><a href="awards.html">Награды</a></li>
+          <li><a href="about.html">О нас</a></li>
+          <li><a href="timetable.html">Расписание занятий</a></li>
+        </ul>
+      </nav>
+    </header>
+    
+    <h1>РАСПИСАНИЕ УЧЕБНОГО ПРОЦЕССА</h1>
+
+ <table class="schedule-table">
+        <thead>
+            <tr>
+                <th>Время</th>
+                <th>ПН</th>
+                <th>ВТ</th>
+                <th>СР</th>
+                <th>ЧТ</th>
+                <th>ПТ</th>
+                <th>СБ</th>
+            </tr>
+        </thead>
+        <tbody id="schedule-body">
+            <!-- Данные будут сгенерированы JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        const groupLinks = {
+            "Леденцы": "ledentsy.html",
+            "Колибри": "kolibri.html",
+            "Мультики": "multiki.html",
+            "Позитивчики": "pozitivchiki.html",
+            "Таптыжки": "taptyzhki.html",
+            "Старшие": "starshie.html",
+            "Сказка": "skazka.html",
+        };
+
+        const daysSchedule = {
+            'ПН': [
+                { time: '16:00 - 18:00', group: 'Леденцы' },
+                { time: '17:00 - 19:00', group: 'Мультики' },
+                { time: '19:00 - 21:00', group: 'Таптыжки' },
+                { time: '18:00 - 19:00', group: 'Сказка' },
+            ],
+            'ВТ': [
+                { time: '16:00 - 18:00', group: 'Колибри' },
+                { time: '19:00 - 20:00', group: 'Позитивчики' },
+                { time: '18:30 - 20:30', group: 'Старшие' }
+            ],
+            'СР': [
+                { time: '16:00 - 18:00', group: 'Леденцы' },
+                { time: '17:00 - 19:00', group: 'Мультики' },
+                { time: '19:00 - 21:00', group: 'Таптыжки' },
+            ],
+            'ЧТ': [
+                { time: '16:00 - 18:00', group: 'Колибри' },
+                { time: '19:00 - 20:00', group: 'Позитивчики' },
+                { time: '18:30 - 20:30', group: 'Старшие' }
+            ],
+            'ПТ': [
+                { time: '16:00 - 18:00', group: 'Леденцы' },
+                { time: '19:00 - 21:00', group: 'Старшие' }
+            ],
+            'СБ': [
+                { time: '10:00 - 11:00', group: 'Позитивчики' },
+                { time: '12:00 - 14:00', group: 'Колибри' },
+                { time: '16:00 - 18:00', group: 'Старшие' }
+            ]
+        };
+
+        function timeToMinutes(timeStr) {
+            const [start] = timeStr.split(' - ');
+            const [hours, minutes] = start.split(':').map(Number);
+            return hours * 60 + minutes;
+        }
+
+        function generateSchedule() {
+            const tbody = document.getElementById('schedule-body');
+           const allTimes = [...new Set(
+    Object.values(daysSchedule).flatMap(day => day.map(event => event.time))
+)];
+            
+            allTimes.sort((a, b) => timeToMinutes(a) - timeToMinutes(b));
+
+            allTimes.forEach(time => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${time}</td>`;
+                
+                ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'].forEach(day => {
+                    const event = daysSchedule[day].find(e => e.time === time);
+                    const cell = document.createElement('td');
+                    
+                    if (event) {
+                        const link = groupLinks[event.group] || '#';
+                        cell.innerHTML = `
+                            <a href="${link}" class="group-name">${event.group}</a>
+                        `;
+                    }
+                    
+                    row.appendChild(cell);
+                });
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        generateSchedule();
+    </script>
+
+      <footer class="footer">
+          <div class="footer-left">
+            <img src="img/ic1.png" alt="Логотип" class="logo1" />
+            <p class="logo-text">«Контраст»</p>
+          </div>
+          <div class="footer-content">
+           <ul class="nav-links">
+          <li><a href="prepod.html">Преподаватели</a></li>
+          <li><a href="new.html">Наша галерея</a></li>
+          <li><a href="new.html">Новости</a></li>
+          <li><a href="reviews.html">Отзывы</a></li>
+          <li><a href="awards.html">Награды</a></li>
+          <li><a href="about.html">О нас</a></li>
+          <li><a href="timetable.html">Расписание занятий</a></li>
+        </ul>
+          </div>
+          <div class="footer-center">
+            <a href="https://vk.com/kontrastbest" class="logo">
+          <img src="/img/vk.png" alt="Логотип" class="logo2"  />
+        </a>
+        <a href="https://t.me/Kontrast_dance" class="logo">
+          <img src="/img/tg.png" alt="Логотип" class="logo2"  />
+        </a>
+          </div>
+          <div class="footer-right">
+            <p>
+              Россия, г. Оренбург, <br />ул. Карагандинская 37А<br />
+              Телефон: + 7 937 485 49 86<br />
+              Ежедневно 10:00-22:00
+            </p>
+          </div>
+        </footer>
+</div>
+</body>
+</html>

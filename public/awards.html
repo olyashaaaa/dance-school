@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Танцевальная студия</title>
+    <link rel="stylesheet" href="new.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+      <nav>
+        <a href="index.html" class="logo">
+          <img src="img/ic1.png" alt="Логотип" />
+        </a>
+        <ul class="nav-links">
+          <li><a href="prepod.html">Преподаватели</a></li>
+          <li><a href="new.html">Наша галерея</a></li>
+          <li><a href="new.html">Новости</a></li>
+          <li><a href="reviews.html">Отзывы</a></li>
+          <li><a href="awards.html">Награды</a></li>
+          <li><a href="about.html">О нас</a></li>
+          <li><a href="timetable.html">Расписание занятий</a></li>
+        </ul>
+      </nav>
+    </header>
+
+
+    <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">Все</button>
+        <button class="filter-btn" data-filter="grand-prix">Гран-при</button>
+        <button class="filter-btn" data-filter="first-place">1 место</button>
+        <button class="filter-btn" data-filter="second-place">2 место</button>
+        <button class="filter-btn" data-filter="third-place">3 место</button>
+        <button class="filter-btn" data-filter="special">Спецпризы</button>
+        <button class="filter-btn" data-filter="diploma">Дипломы</button>
+    </div>
+    
+    <div class="awards-container">
+        <!-- Пример награды 1 -->
+        <div class="award-card" data-category="grand-prix">
+            <img src="/img/grandprix.jpg" alt="Гран-при фестиваля" class="award-image">
+            <div class="award-content">
+                <h3 class="award-title"><span class="trophy-icon">🏆</span> Гран-при</h3>
+                <div class="award-event">Международный фестиваль "Искусство без границ"</div>
+
+
+<div class="award-date">Май 2023</div>
+                <div class="award-description">
+                    Высшая награда фестиваля за постановку "Времена года". Жюри отметило оригинальную хореографию и высокий уровень исполнения.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Пример награды 2 -->
+        <div class="award-card" data-category="first-place">
+            <img src="/img/firstplace.jpg" alt="Первое место" class="award-image">
+            <div class="award-content">
+                <h3 class="award-title"><span class="trophy-icon">🥇</span> 1 место</h3>
+                <div class="award-event">Всероссийский конкурс "Танцевальная волна"</div>
+                <div class="award-date">Ноябрь 2022</div>
+                <div class="award-description">
+                    Победа в номинации "Современная хореография" с номером "Городские ритмы". Особо отмечена синхронность исполнения.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Пример награды 3 -->
+        <div class="award-card" data-category="special">
+            <img src="/img/special.jpg" alt="Специальный приз" class="award-image">
+            <div class="award-content">
+                <h3 class="award-title"><span class="trophy-icon">✨</span> Приз зрительских симпатий</h3>
+                <div class="award-event">Фестиваль "Танцевальная осень"</div>
+                <div class="award-date">Октябрь 2022</div>
+                <div class="award-description">
+                    Специальный приз от организаторов за номер "Карнавал", получивший наибольшее количество голосов от зрителей.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Пример награды 4 -->
+        <div class="award-card" data-category="second-place">
+            <img src="/img/secondplace.jpg" alt="Второе место" class="award-image">
+            <div class="award-content">
+                <h3 class="award-title"><span class="trophy-icon">🥈</span> 2 место</h3>
+                <div class="award-event">Конкурс "Молодые таланты"</div>
+                <div class="award-date">Март 2022</div>
+                <div class="award-description">
+                    Второе место в номинации "Народный танец" с композицией "Русские узоры". Жюри отметило аутентичность костюмов.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Пример награды 5 -->
+        <div class="award-card" data-category="diploma">
+            <img src="/img/diploma.jpg" alt="Диплом" class="award-image">
+            <div class="award-content">
+                <h3 class="award-title"><span class="trophy-icon">📜</span> Диплом лауреата</h3>
+                <div class="award-event">Фестиваль "Весенние ритмы"</div>
+                <div class="award-date">Апрель 2021</div>
+                <div class="award-description">
+                    Диплом лауреата I степени за номер "Весеннее пробуждение" в номинации "Детский танец".
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Фильтрация наград
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Удаляем активный класс у всех кнопок
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                // Добавляем активный класс текущей кнопке
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                const awards = document.querySelectorAll('.award-card');
+                
+                awards.forEach(award => {
+                    if (filter === 'all' || award.dataset.category === filter) {
+                        award.style.display = 'block';
+                    } else {
+                        award.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+
+
+</body>
+</html>

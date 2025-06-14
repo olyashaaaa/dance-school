@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px 0;
+        }
+        
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+        
+        .admin-panel {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1200px;
+            display: none;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        /* Навигация */
+        .nav-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .nav-tab {
+            background: none;
+            border: none;
+            padding: 15px 25px;
+            font-size: 16px;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .nav-tab.active {
+            color: #4b0082;
+            border-bottom-color: #4b0082;
+            font-weight: bold;
+        }
+        
+        .nav-tab:hover {
+            color: #4b0082;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        button {
+            background-color: #4b0082;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #5a1196;
+        }
+        
+        .btn-full {
+            width: 100%;
+        }
+        
+        .btn-success {
+            background-color: #5cb85c;
+            margin-top: 10px;
+        }
+        
+        .btn-success:hover {
+            background-color: #449d44;
+        }
+        
+        .btn-danger {
+            background-color: #d9534f;
+            width: auto;
+            padding: 5px 10px;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .btn-danger:hover {
+            background-color: #c9302c;
+        }
+        
+        .error-message {
+            color: #d9534f;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logout-btn {
+            background-color: #d9534f;
+            width: auto;
+            padding: 8px 15px;
+        }
+        
+        .logout-btn:hover {
+            background-color: #c9302c;
+        }
+        
+        .item-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        
+        .item-header {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .item-date {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .item-content {
+            color: #555;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        
+        .image-preview {
+            max-width: 100px;
+            max-height: 100px;
+            margin: 5px;
+            border-radius: 4px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .file-input-container {
+            border: 2px dashed #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        
+        .file-input-container:hover {
+            border-color: #4b0082;
+        }
+        
+        #file-list {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Форма входа -->
+    <div class="login-container" id="loginForm">
+        <h1>Вход в панель администратора</h1>
+        <div class="form-group">
+            <label for="username">Логин:</label>
+            <input type="text" id="username" placeholder="Введите ваш логин">
+        </div>
+        <div class="form-group">
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" placeholder="Введите ваш пароль">
+        </div>
+        <div class="error-message" id="errorMessage">Неверный логин или пароль</div>
+        <button id="loginBtn" class="btn-full">Войти</button>
+    </div>
+    
+    <!-- Панель администратора -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h1>Панель администратора</h1>
+            <button class="logout-btn" id="logoutBtn">Выйти</button>
+        </div>
+        
+        <!-- Навигация -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-tab="news">Новости</button>
+            <button class="nav-tab" data-tab="reviews">Отзывы</button>
+            <button class="nav-tab" data-tab="applications">Заявки</button>
+        </div>
+        
+        <!-- Вкладка новостей -->
+        <div class="tab-content active" id="news-tab">
+            <h2>Управление новостями</h2>
+            
+            <!-- Подменю для новостей -->
+            <div style="margin-bottom: 20px;">
+                <button id="show-news-list" class="nav-tab active">Список новостей</button>
+                <button id="show-add-news" class="nav-tab">Добавить новость</button>
+            </div>
+            
+            <!-- Список новостей -->
+            <div id="news-list-section">
+                <div id="news-list">
+                    <!-- Новости будут загружены через JS -->
+                </div>
+            </div>
+            
+            <!-- Форма добавления новости -->
+            <div id="add-news-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="news-title">Заголовок новости:</label>
+                        <input type="text" id="news-title" placeholder="Заголовок новости" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event-date">Дата события:</label>
+                        <input type="date" id="event-date">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="event-location">Место проведения:</label>
+                    <input type="text" id="event-location" placeholder="Место проведения">
+                </div>
+                
+                <div class="form-group">
+                    <label for="news-content">Основное содержание:</label>
+                    <textarea id="news-content" placeholder="Основное содержание новости" rows="4" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="news-highlights">Ключевые моменты:</label>
+                    <textarea id="news-highlights" placeholder="Ключевые моменты (каждый с новой строки)" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="news-impressions">Впечатления:</label>
+                    <textarea id="news-impressions" placeholder="Впечатления от события" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="news-images">Изображения:</label>
+                    <div class="file-input-container">
+                        <input type="file" id="news-images" multiple accept="image/*" style="display: none;">
+                        <p>Нажмите или перетащите изображения сюда</p>
+                        <button type="button" onclick="document.getElementById('news-images').click()">Выбрать файлы</button>
+                        <div id="file-list"></div>
+                    </div>
+                </div>
+                
+                
+                <button class="btn-success btn-full" id="save-news">Сохранить новость</button>
+                <div class="error-message" id="news-error"></div>
+            </div>
+        </div>
+        
+        <!-- Вкладка отзывов -->
+        <div class="tab-content" id="reviews-tab">
+            <h2>Управление отзывами</h2>
+            
+            <!-- Подменю для отзывов -->
+            <div style="margin-bottom: 20px;">
+                <button id="show-reviews-list" class="nav-tab active">Список отзывов</button>
+                <button id="show-add-review" class="nav-tab">Добавить отзыв</button>
+            </div>
+            
+            <!-- Список отзывов -->
+            <div id="reviews-list-section">
+                <div id="reviews-list">
+                    <!-- Отзывы будут загружены через JS -->
+                </div>
+            </div>
+            
+            <!-- Форма добавления отзыва -->
+            <div id="add-review-section" style="display: none;">
+                <div class="form-group">
+                    <label for="review-author">Имя автора:</label>
+                    <input type="text" id="review-author" placeholder="Имя автора">
+                </div>
+                <div class="form-group">
+                    <label for="review-text">Текст отзыва:</label>
+                    <textarea id="review-text" placeholder="Текст отзыва"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="review-rating">Рейтинг (1-5):</label>
+                    <select id="review-rating">
+                        <option value="5">5 - Отлично</option>
+                        <option value="4">4 - Хорошо</option>
+                        <option value="3">3 - Удовлетворительно</option>
+                        <option value="2">2 - Плохо</option>
+                        <option value="1">1 - Ужасно</option>
+                    </select>
+                </div>
+                <button class="btn-success btn-full" id="save-review">Сохранить отзыв</button>
+                <div class="error-message" id="review-error"></div>
+            </div>
+        </div>
+        
+        <!-- Вкладка заявок -->
+        <div class="tab-content" id="applications-tab">
+            <h2>Заявки на пробные занятия</h2>
+            <p style="color: #666; margin-bottom: 20px;">Здесь отображаются все заявки, поданные через форму на главной странице</p>
+            
+            <div id="applications-list">
+                <!-- Заявки будут загружены через JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupEventListeners();
+        });
+        
+        function initializeApp() {
+            const loginForm = document.getElementById('loginForm');
+            const adminPanel = document.getElementById('adminPanel');
+            
+            // Проверяем, был ли пользователь уже авторизован
+            if (localStorage.getItem('adminLoggedIn') === 'true') {
+                loginForm.style.display = 'none';
+                adminPanel.style.display = 'block';
+                loadCurrentTabData();
+            }
+        }
+        
+        function setupEventListeners() {
+            setupLoginEvents();
+            setupNavigationEvents();
+            setupNewsEvents();
+            setupReviewEvents();
+            setupFileUploadEvents();
+        }
+        
+        function setupLoginEvents() {
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const passwordInput = document.getElementById('password');
+            
+            loginBtn.addEventListener('click', handleLogin);
+            logoutBtn.addEventListener('click', handleLogout);
+            passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') loginBtn.click();
+            });
+        }
+        
+        function setupNavigationEvents() {
+            // Основная навигация
+            document.querySelectorAll('.nav-tabs .nav-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.dataset.tab;
+                    switchMainTab(tabName);
+                });
+            });
+            
+            // Подменю новостей
+            document.getElementById('show-news-list').addEventListener('click', () => showNewsSection('list'));
+            document.getElementById('show-add-news').addEventListener('click', () => showNewsSection('add'));
+            
+            // Подменю отзывов
+            document.getElementById('show-reviews-list').addEventListener('click', () => showReviewsSection('list'));
+            document.getElementById('show-add-review').addEventListener('click', () => showReviewsSection('add'));
+        }
+        
+        function setupNewsEvents() {
+            document.getElementById('save-news').addEventListener('click', saveNews);
+        }
+        
+        function setupReviewEvents() {
+            document.getElementById('save-review').addEventListener('click', saveReview);
+        }
+        
+        function setupFileUploadEvents() {
+            const fileInput = document.getElementById('news-images');
+            const fileList = document.getElementById('file-list');
+            
+            fileInput.addEventListener('change', function() {
+                const files = Array.from(this.files);
+                fileList.innerHTML = files.length > 0 
+                    ? `Выбрано файлов: ${files.length}<br>${files.map(f => f.name).join(', ')}`
+                    : '';
+            });
+        }
+        
+        async function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            try {
+                const response = await fetch(`${API_URL}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                if (response.ok) {
+                    localStorage.setItem('adminLoggedIn', 'true');
+                    document.getElementById('loginForm').style.display = 'none';
+                    document.getElementById('adminPanel').style.display = 'block';
+                    errorMessage.style.display = 'none';
+                    loadCurrentTabData();
+                } else {
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Ошибка авторизации:', error);
+                errorMessage.style.display = 'block';
+            }
+        }
+        
+        function handleLogout() {
+            localStorage.removeItem('adminLoggedIn');
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+        
+        function switchMainTab(tabName) {
+            // Обновляем активную вкладку
+            document.querySelectorAll('.nav-tabs .nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+            
+            // Показываем соответствующий контент
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            // Загружаем данные для активной вкладки
+            loadCurrentTabData();
+        }
+        
+        function showNewsSection(section) {
+            const listBtn = document.getElementById('show-news-list');
+            const addBtn = document.getElementById('show-add-news');
+            const listSection = document.getElementById('news-list-section');
+            const addSection = document.getElementById('add-news-section');
+            
+            if (section === 'list') {
+                listBtn.classList.add('active');
+                addBtn.classList.remove('active');
+                listSection.style.display = 'block';
+                addSection.style.display = 'none';
+                loadNews();
+            } else {
+                addBtn.classList.add('active');
+                listBtn.classList.remove('active');
+                addSection.style.display = 'block';
+                listSection.style.display = 'none';
+            }
+        }
+        
+        function showReviewsSection(section) {
+            const listBtn = document.getElementById('show-reviews-list');
+            const addBtn = document.getElementById('show-add-review');
+            const listSection = document.getElementById('reviews-list-section');
+            const addSection = document.getElementById('add-review-section');
+            
+            if (section === 'list') {
+                listBtn.classList.add('active');
+                addBtn.classList.remove('active');
+                listSection.style.display = 'block';
+                addSection.style.display = 'none';
+                loadReviews();
+            } else {
+                addBtn.classList.add('active');
+                listBtn.classList.remove('active');
+                addSection.style.display = 'block';
+                listSection.style.display = 'none';
+            }
+        }
+        
+        function loadCurrentTabData() {
+            const activeTab = document.querySelector('.nav-tabs .nav-tab.active');
+            if (activeTab) {
+                const tabName = activeTab.dataset.tab;
+                if (tabName === 'news') {
+                    loadNews();
+                } else if (tabName === 'reviews') {
+                    loadReviews();
+                } else if (tabName === 'applications') {
+                    loadApplications();
+                }
+            }
+        }
+        
+        async function loadNews() {
+            try {
+                const response = await fetch(`${API_URL}/news`);
+                if (!response.ok) throw new Error('Ошибка загрузки');
+                
+                const news = await response.json();
+                const newsList = document.getElementById('news-list');
+                
+                if (news.length === 0) {
+                    newsList.innerHTML = '<p>Нет новостей для отображения</p>';
+                    return;
+                }
+                
+                newsList.innerHTML = news.map(item => `
+                    <div class="item-card">
+                        <div class="item-header">${item.title}</div>
+                        <div class="item-date">${new Date(item.created_at).toLocaleDateString('ru-RU')} 
+                            ${item.event_date ? `• Дата события: ${new Date(item.event_date).toLocaleDateString('ru-RU')}` : ''}
+                            ${item.event_location ? `• Место: ${item.event_location}` : ''}
+                        </div>
+                        <div class="item-content">${item.content}</div>
+                        ${item.highlights ? `<div class="item-content"><strong>Ключевые моменты:</strong><br>${item.highlights.replace(/\n/g, '<br>')}</div>` : ''}
+                        ${item.impressions ? `<div class="item-content"><strong>Впечатления:</strong><br>${item.impressions.replace(/\n/g, '<br>')}</div>` : ''}
+                        ${item.images ? renderImages(JSON.parse(item.images)) : ''}
+                        <button class="btn-danger" onclick="deleteNews(${item.id})">Удалить</button>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Ошибка:', error);
+                document.getElementById('news-list').innerHTML = '<p>Ошибка загрузки новостей</p>';
+            }
+        }
+        
+        function renderImages(images) {
+            if (!images || images.length === 0) return '';
+            return `<div style="margin: 10px 0;">${images.map(img => 
+                `<img src="${img}" class="image-preview" alt="Изображение">`
+            ).join('')}</div>`;
+        }
+        
+        async function saveNews() {
+            const formData = new FormData();
+            const errorElement = document.getElementById('news-error');
+            
+            // Получаем данные формы
+            const title = document.getElementById('news-title').value.trim();
+            const eventDate = document.getElementById('event-date').value;
+            const eventLocation = document.getElementById('event-location').value.trim();
+            const content = document.getElementById('news-content').value.trim();
+            const highlights = document.getElementById('news-highlights').value.trim();
+            const impressions = document.getElementById('news-impressions').value.trim();
+            const status = document.getElementById('news-status').value;
+            const images = document.getElementById('news-images').files;
+            
+            // Проверка обязательных полей
+            if (!title || !content) {
+                errorElement.textContent = 'Заполните обязательные поля: заголовок и содержание';
+                errorElement.style.display = 'block';
+                return;
+            }
+            
+            // Добавляем данные в FormData
+            formData.append('title', title);
+            if (eventDate) formData.append('eventDate', eventDate);
+            if (eventLocation) formData.append('eventLocation', eventLocation);
+            formData.append('content', content);
+            if (highlights) formData.append('highlights', highlights);
+            if (impressions) formData.append('impressions', impressions);
+            formData.append('status', status);
+            
+            // Добавляем изображения
+            for (let i = 0; i < images.length; i++) {
+                formData.append('gallery-images', images[i]);
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/news`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) throw new Error('Ошибка сохранения');
+                
+                // Очистка формы
+                document.getElementById('news-title').value = '';
+                document.getElementById('event-date').value = '';
+                document.getElementById('event-location').value = '';
+                document.getElementById('news-content').value = '';
+                document.getElementById('news-highlights').value = '';
+                document.getElementById('news-impressions').value = '';
+                document.getElementById('news-images').value = '';
+                document.getElementById('file-list').innerHTML = '';
+                errorElement.style.display = 'none';
+                
+                alert('Новость успешно сохранена!');
+                showNewsSection('list'); // Переключаемся на список
+            } catch (error) {
+                errorElement.textContent = error.message;
+                errorElement.style.display = 'block';
+            }
+        }
+        
+        async function deleteNews(id) {
+            if (!confirm('Вы уверены, что хотите удалить эту новость?')) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/news/${id}`, { method: 'DELETE' });
+                if (!response.ok) throw new Error('Ошибка удаления');
+                
+                loadNews();
+                alert('Новость удалена успешно!');
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Не удалось удалить новость');
+            }
+        }
+        
+        // Функции для работы с отзывами (существующие)
+        async function loadReviews() {
+            try {
+                const response = await fetch(`${API_URL}/reviews`);
+                if (!response.ok) throw new Error('Ошибка загрузки');
+                
+                const reviews = await response.json();
+                const reviewsList = document.getElementById('reviews-list');
+                
+                if (reviews.length === 0) {
+                    reviewsList.innerHTML = '<p>Нет отзывов для отображения</p>';
+                    return;
+                }
+                
+                reviewsList.innerHTML = reviews.map(review => `
+                    <div class="item-card">
+                        <div class="item-header">${review.author || 'Аноним'}</div>
+                        <div class="item-date">${new Date(review.date || review.created_at).toLocaleDateString('ru-RU')} • 
+                            Рейтинг: <span style="color: #ffc107;">${'★'.repeat(review.rating || 5)}${'☆'.repeat(5 - (review.rating || 5))}</span>
+                        </div>
+                        <div class="item-content">${review.text || review.review_text}</div>
+                        <button class="btn-danger" onclick="deleteReview(${review.id})">Удалить</button>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Ошибка:', error);
+                document.getElementById('reviews-list').innerHTML = '<p>Ошибка загрузки отзывов</p>';
+            }
+        }
+        
+        async function saveReview() {
+            const author = document.getElementById('review-author').value.trim();
+            const text = document.getElementById('review-text').value.trim();
+            const rating = document.getElementById('review-rating').value;
+            const errorElement = document.getElementById('review-error');
+            
+            if (!author || !text) {
+                errorElement.textContent = 'Заполните все поля';
+                errorElement.style.display = 'block';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/reviews`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ author, text, rating })
+                });
+                
+                if (!response.ok) throw new Error('Ошибка сохранения');
+                
+                // Очистка формы
+                document.getElementById('review-author').value = '';
+                document.getElementById('review-text').value = '';
+                errorElement.style.display = 'none';
+                
+                alert('Отзыв успешно сохранен!');
+                showReviewsSection('list'); // Переключаемся на список
+            } catch (error) {
+                errorElement.textContent = error.message;
+                errorElement.style.display = 'block';
+            }
+        }
+        
+        async function deleteReview(id) {
+            if (!confirm('Вы уверены, что хотите удалить этот отзыв?')) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/reviews/${id}`, { method: 'DELETE' });
+                if (!response.ok) throw new Error('Ошибка удаления');
+                
+                loadReviews();
+                alert('Отзыв удален успешно!');
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Не удалось удалить отзыв');
+            }
+        }
+        
+        // Функции для работы с заявками
+        async function loadApplications() {
+            try {
+                const response = await fetch(`${API_URL}/applications`);
+                if (!response.ok) throw new Error('Ошибка загрузки');
+                
+                const applications = await response.json();
+                const applicationsList = document.getElementById('applications-list');
+                
+                if (applications.length === 0) {
+                    applicationsList.innerHTML = '<p>Пока нет заявок</p>';
+                    return;
+                }
+                
+                applicationsList.innerHTML = applications.map(app => `
+                    <div class="item-card">
+                        <div class="item-header">Заявка от ${app.fio}</div>
+                        <div class="item-date">${new Date(app.created_at).toLocaleDateString('ru-RU')} ${new Date(app.created_at).toLocaleTimeString('ru-RU', {hour: '2-digit', minute: '2-digit'})}</div>
+                        <div class="item-content">
+                            <strong>ФИО родителя:</strong> ${app.fio}<br>
+                            <strong>Телефон:</strong> <a href="tel:${app.phone}" style="color: #4b0082; text-decoration: none;">${app.phone}</a><br>
+                            <strong>Имя ребенка:</strong> ${app.child_name}
+                        </div>
+                        <button class="btn-danger" onclick="deleteApplication(${app.id})">Удалить</button>
+                    </div>
+                `).join('');
+                
+                // Добавляем статистику
+                const stats = `
+                    <div style="background: #f0f0f0; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                        <strong>Статистика:</strong> Всего заявок: ${applications.length}
+                    </div>
+                `;
+                applicationsList.innerHTML = stats + applicationsList.innerHTML;
+                
+            } catch (error) {
+                console.error('Ошибка:', error);
+                document.getElementById('applications-list').innerHTML = '<p>Ошибка загрузки заявок</p>';
+            }
+        }
+        
+        async function deleteApplication(id) {
+            if (!confirm('Вы уверены, что хотите удалить эту заявку?')) return;
+            
+            try {
+                const response = await fetch(`${API_URL}/applications/${id}`, { method: 'DELETE' });
+                if (!response.ok) throw new Error('Ошибка удаления');
+                
+                loadApplications();
+                alert('Заявка удалена успешно!');
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Не удалось удалить заявку');
+            }
+        }
+    </script>
+</body>
+</html>

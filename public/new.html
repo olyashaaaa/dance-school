@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Танцевальная студия</title>
+    <link rel="stylesheet" href="new.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <header>
+      <nav>
+        <a href="index.html" class="logo">
+          <img src="img/ic1.png" alt="Логотип" />
+        </a>
+        <ul class="nav-links">
+          <li><a href="prepod.html">Преподаватели</a></li>
+          <li><a href="new.html">Наша галерея</a></li>
+          <li><a href="new.html">Новости</a></li>
+          <li><a href="reviews.html">Отзывы</a></li>
+          <li><a href="awards.html">Награды</a></li>
+          <li><a href="about.html">О нас</a></li>
+          <li><a href="timetable.html">Расписание занятий</a></li>
+        </ul>
+      </nav>
+    </header>
+
+<h1>МЫ ЛЮБИМ ТО,ЧТО МЫ ДЕЛАЕМ</h1>
+<h2>Самые свежие новости нашего коллектива</h2>
+
+<div class="blog" id="news-container">
+    <!-- Новости будут загружены динамически из API -->
+    <div class="loading-message">Загрузка новостей...</div>
+</div>
+
+<div class="bg"></div>
+
+ <div class="gallery-container">
+        <div class="gallery">
+            <img src="img/1.jpg" class="slide" alt="Photo 1">
+            <img src="img/2.jpg" class="slide" alt="Photo 2">
+            <img src="img/3.jpg" class="slide" alt="Photo 3">
+            <img src="img/4.jpg" class="slide" alt="Photo 4">
+        </div>
+        
+        <div class="arrow left-arrow">❮</div>
+        <div class="arrow right-arrow">❯</div>
+        
+        <div class="dots"></div>
+    </div>
+
+    <footer class="footer">
+          <div class="footer-left">
+            <img src="img/ic1.png" alt="Логотип" class="logo1" />
+            <p class="logo-text">«Контраст»</p>
+          </div>
+          <div class="footer-content">
+           <ul class="nav-links">
+          <li><a href="prepod.html">Преподаватели</a></li>
+          <li><a href="new.html">Наша галерея</a></li>
+          <li><a href="new.html">Новости</a></li>
+          <li><a href="reviews.html">Отзывы</a></li>
+          <li><a href="awards.html">Награды</a></li>
+          <li><a href="about.html">О нас</a></li>
+          <li><a href="timetable.html">Расписание занятий</a></li>
+        </ul>
+          </div>
+          <div class="footer-center">
+            <a href="https://vk.com/kontrastbest" class="logo">
+          <img src="/img/vk.png" alt="Логотип" class="logo2"  />
+        </a>
+        <a href="https://t.me/Kontrast_dance" class="logo">
+          <img src="/img/tg.png" alt="Логотип" class="logo2"  />
+        </a>
+          </div>
+          <div class="footer-right">
+            <p>
+              Россия, г. Оренбург, <br />ул. Карагандинская 37А<br />
+              Телефон: + 7 937 485 49 86<br />
+              Ежедневно 10:00-22:00
+            </p>
+          </div>
+        </footer>
+
+    <script>
+        const API_URL = 'http://localhost:3000/api';
+        
+        // Загрузка новостей при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNews();
+        });
+
+        // Функция загрузки новостей из API
+        async function loadNews() {
+            try {
+                const response = await fetch(`${API_URL}/news`);
+                if (!response.ok) throw new Error('Ошибка загрузки новостей');
+                
+                const newsData = await response.json();
+                displayNews(newsData);
+            } catch (error) {
+                console.error('Ошибка:', error);
+                document.getElementById('news-container').innerHTML = 
+                    '<div class="error-message">Не удалось загрузить новости. Попробуйте обновить страницу.</div>';
+            }
+        }
+
+        // Функция отображения новостей
+        function displayNews(newsArray) {
+            const container = document.getElementById('news-container');
+            
+            if (newsArray.length === 0) {
+                container.innerHTML = '<div class="no-news">Новостей пока нет</div>';
+                return;
+            }
+
+            const newsHTML = newsArray.map((news, index) => {
+                // Получаем первое изображение или используем дефолтное
+                let backgroundImage = 'img/default-news.jpg'; // дефолтное изображение
+                if (news.images) {
+                    try {
+                        const images = JSON.parse(news.images);
+                        if (images && images.length > 0) {
+                            backgroundImage = images[0];
+                        }
+                    } catch (e) {
+                        console.warn('Ошибка парсинга изображений:', e);
+                    }
+                }
+
+                return `
+                    <div class="photo-block${index > 0 ? index : ''}" style="background-image: url('${backgroundImage}')">
+                        <div class="overlay">
+                            <div class="overlay-text">${news.title}</div>
+                            <a href="news-detail.html?id=${news.id}" class="arrow-button" aria-label="Читать новость">
+                                <svg class="arrow1" width="20" height="20" viewBox="0 0 24 24">
+                                    <polyline points="9 6 15 12 9 18" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = newsHTML;
+        }
+    </script>
+
+</body>
+</html>
