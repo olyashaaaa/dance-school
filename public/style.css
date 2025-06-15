@@ -149,7 +149,7 @@ background-color: white;
 color: black;
 }
 .info {
-    background-image: url(img/Group\ 6.svg);
+
     background-position: 46% 86%;
     background-repeat: no-repeat;
     background-size: 300px;
@@ -327,10 +327,10 @@ color: black;
     }
 
     .labels {
-        padding-top: 30px;
+        padding-top: 10px;
         display: flex;
         flex-direction: column;
-        gap: 24px;
+        gap: 15px;
         color: #fff;
     }
 
@@ -817,4 +817,263 @@ height: 150px;
       .firework:nth-child(7) { background: #6c5ce7; }
       .firework:nth-child(8) { background: #a29bfe; }
 
-      
+
+          
+/* ------------------- МОБИЛЬНАЯ ВЕРСИЯ ------------------- */
+@media only screen and (max-width: 375px) {
+  /* ====== ШАПКА ====== */
+  nav {
+    flex-direction: column;   /* шапка по вертикали */
+    align-items: center;      /* по центру по горизонтали */
+    margin: 10px 0;           /* убираем большие боковые отступы */
+  }
+  .logo {
+    margin-bottom: 10px;
+  }
+  .logo img {
+    height: 40px;
+  }
+  nav ul {
+    display: flex;            /* вернуть flex-режим */
+    flex-direction: column;   /* вертикальный список */
+    align-items: center;
+    width: 100%;
+  }
+  nav ul li {
+    margin: 8px 0;            /* отступ между пунктами */
+    width: 100%;
+    text-align: center;       /* текст по центру */
+  }
+  nav ul li a {
+    display: block;           /* чтобы width:100% срабатывал */
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+  }
+
+  /* ====== HERO ====== */
+  .hero {
+    padding-left: 20px;
+    background-size: cover;
+  }
+  .hero h1 {
+    font-size: 15px;
+  }
+  .hero p {
+    font-size: 16px;
+    margin: 15px 0;
+  }
+  .hero .btn1 {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  /* ====== INFO ====== */
+  .info {
+    display: flex;            /* вернуть flex-режим */
+    flex-direction: column;
+    background-size: contain;
+    padding: 20px;
+  }
+  .block_1,
+  .block_2 {
+    display: flex;            /* вернуть flex-режим */
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+  }
+  .text {
+    max-width: 100%;
+  }
+  .h3 {
+    font-size: 24px;
+  }
+  .p {
+    font-size: 18px;
+  }
+  .photo > img {
+    width: 100%;
+  }
+
+  /* ====== RECORD ====== */
+  .record {
+    min-height: auto;
+    padding: 40px 20px;
+  }
+  .button2 {
+    padding: 16px 32px;
+    font-size: 24px;
+  }
+  .h11 {
+    font-size: 36px;
+  }
+  .h22 {
+    font-size: 20px;
+  }
+
+  /* ====== TEACHER ====== */
+  .part {
+    display: flex;            /* вернуть flex-режим */
+    flex-direction: column;
+    gap: 20px;
+  }
+  .fio {
+    font-size: 28px;
+  }
+  .job {
+    font-size: 20px;
+  }
+  .info_job {
+    font-size: 16px;
+  }
+
+  /* ====== PRICING ====== */
+  .pricing {
+    padding-left: 20px;
+  }
+  .container h1,
+  .card2 h1 {
+    font-size: 48px;
+  }
+  .cards,
+  .price_cards {
+    display: flex;            /* вернуть flex-режим */
+    flex-direction: column;
+    gap: 15px;
+  }
+  .card_pink {
+    width: 100%;
+    height: auto;
+    padding: 8%;
+  }
+  .card_pink h2 {
+    font-size: 28px;
+  }
+  .card_pink p,
+  .price_card p {
+    font-size: 18px;
+  }
+  .price_card {
+    width: 100%;
+  }
+  .price_card h2 {
+    font-size: 28px;
+  }
+  h1{
+    font-size: 55px;
+  }
+
+  /* ====== REVIEWS ====== */
+  .reviews-container {
+    display: flex;            /* вернуть flex-режим */
+    flex-direction: column;
+  }
+  .review {
+    width: 100%;
+    max-width: none;
+  }
+
+  /* ====== FOOTER ====== */
+  .footer {
+    display: flex;            /* вернуть flex-режим */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+  }
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .footer-center {
+    margin-top: 0;
+  }
+
+  /* ====== ОВЕРЛЕЙ, УСПЕШНОЕ УВЕДОМЛЕНИЕ, ФЕЙЕРВЕРКИ ====== */
+  .overlay,
+  .overlay.show {
+    display: none;
+  }
+  .overlay.show {
+    display: block;
+  }
+
+  .success-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    width: 90%;
+    max-width: 320px;
+    padding: 20px;
+    display: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    background: #ffffff;
+    z-index: 10000;
+    animation: slideInScale 0.4s ease-out forwards;
+  }
+  .success-notification.show {
+    display: block;
+  }
+  .success-notification h2 {
+    font-size: 1.4em;
+    margin-bottom: 16px;
+    color: #B22053;
+  }
+  .success-notification p {
+    font-size: 1em;
+    color: #666666;
+    margin-bottom: 24px;
+    line-height: 1.4;
+  }
+  .success-notification .close-btn {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 1em;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #B22053, #764ba2);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .success-notification .close-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+  @keyframes slideInScale {
+    0% {
+      transform: translate(-50%, -50%) scale(0.5);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .fireworks {
+    display: none;
+  }
+  .fireworks.show {
+    display: block;
+  }
+  .firework {
+    width: 4px;
+    height: 4px;
+    animation: fireworkExplode 1.2s ease-out forwards;
+  }
+  @keyframes fireworkExplode {
+    0% {
+      transform: translate(0,0) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--end-x,0), var(--end-y,0)) scale(0.3);
+      opacity: 0;
+    }
+  }
+}

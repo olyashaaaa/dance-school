@@ -587,3 +587,134 @@ height: 150px;
     margin-top: 50px;
 }
 
+@media only screen and (max-width: 375px) {
+  /* 1) Сброс отступов шапки, логотип и меню в колонку */
+  nav {
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 16px;
+  }
+  .logo {
+    margin-bottom: 10px;
+  }
+  .logo img {
+    height: 40px;
+  }
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 8px;
+  }
+  nav ul li {
+    margin: 6px 0;
+    width: 100%;
+    text-align: center;
+  }
+  nav ul li a {
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    font-size: 16px;
+  }
+
+  /* 2) Заголовки */
+  h1 {
+    font-size: 1.8em;
+    padding: 0 16px;
+  }
+  h2 {
+    font-size: 1.4em;
+    padding: 0 16px;
+  }
+
+  /* 3) Блок blog и фотоблоки */
+  .blog {
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+  }
+  .photo-block,
+  .photo-block1,
+  .photo-block2,
+  .photo-block3 {
+    width: calc(100% - 32px);
+    height: auto;
+    aspect-ratio: 1 / 1;
+    margin: 16px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* 4) Галерея */
+  .gallery-container {
+    margin: 20px auto;
+    width: 100%;
+  }
+  .gallery {
+    display: flex;
+    overflow-x: scroll;
+  }
+  .slide {
+    min-width: 100%;
+    height: 200px;
+  }
+  .arrow {
+    display: none; /* или оставить, если нужны стрелки */
+  }
+  .dots {
+    bottom: 10px;
+  }
+  .group-title{
+    font-size: 30px;
+  }
+
+  /* 5) Awards-карточки */
+  .awards-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .award-card {
+    margin: 0 16px;
+  }
+  .award-image {
+    height: 150px;
+  }
+  .award-content {
+    padding: 12px;
+  }
+  .award-title {
+    font-size: 1.2rem;
+  }
+  .award-event,
+  .award-date,
+  .award-description {
+    font-size: 0.9rem;
+  }
+
+  /* 6) Footer */
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 16px;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    width: 100%;
+    margin: 8px 0;
+  }
+  .footer-content ul {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .footer-content ul li {
+    margin: 4px 0;
+  }
+}

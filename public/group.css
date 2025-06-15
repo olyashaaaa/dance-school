@@ -177,28 +177,30 @@ padding: 25px;
             top: 20px;
         }
         
-        /* Педагог */
-        .teacher-card {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        
-        .teacher-photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--light);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 15px;
-        }
-        
-        .teacher-name {
-            color: var(--primary);
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
+ 
+/* TEACHER */
+.teacher-card {
+  text-align: center;
+}
+.teacher-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--light);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+}
+.teacher-name {
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+.teacher-info {
+  text-align: center;
+  font-size: .95rem;
+  line-height: 1.4;
+  margin-top: 10px;
+}
         
         /* Расписание */
         .schedule-item {
@@ -267,3 +269,129 @@ padding: 25px;
             box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
         }
 
+        
+@media (max-width: 375px) {
+  /* Общие настройки */
+  body {
+    padding: 0 10px;
+  }
+  * {
+    font-size: 14px;
+  }
+
+  /* Навигация */
+  nav {
+    flex-direction: column;   /* шапка по вертикали */
+    align-items: center;      /* по центру по горизонтали */
+    margin: 10px 0;           /* убираем большие боковые отступы */
+  }
+  .logo {
+    margin-bottom: 10px;
+  }
+  .logo img {
+    height: 40px;
+  }
+  nav ul {
+    display: flex;            /* вернуть flex-режим */
+    flex-direction: column;   /* вертикальный список */
+    align-items: center;
+    width: 100%;
+  }
+  nav ul li {
+    margin: 8px 0;            /* отступ между пунктами */
+    width: 100%;
+    text-align: center;       /* текст по центру */
+  }
+  nav ul li a {
+    display: block;           /* чтобы width:100% срабатывал */
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+  }
+
+  /* Контейнер */
+  .container {
+    padding: 0;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  /* Шапка группы */
+  .group-header {
+    padding: 50px 15px;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  }
+  .group-title {
+    font-size: 2rem;
+  }
+  .group-subtitle {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+  .group-badge {
+    padding: 6px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Основной контент – одна колонка */
+  .group-content {
+    display: block;
+  }
+
+  /* Секции */
+  .group-section {
+    padding: 25px;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-size: 1.4rem;
+  }
+  .group-description {
+    font-size: 1rem;
+  }
+
+  /* Участники */
+  .members-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 15px;
+  }
+  .member-photo {
+    height: 120px;
+  }
+  .member-name {
+    font-size: 0.95rem;
+  }
+  .member-age {
+    font-size: 0.8rem;
+  }
+
+  /* Сайдбар прячем */
+  .sidebar-card {
+    display: none;
+  }
+
+  /* Расписание */
+  .schedule-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 0;
+  }
+  .schedule-time {
+    margin-top: 4px;
+  }
+
+  /* Галерея – две колонки */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .gallery-item {
+    height: 80px;
+  }
+
+  /* Кнопки */
+  .btn {
+    font-size: 0.95rem;
+    padding: 10px 20px;
+  }
+}

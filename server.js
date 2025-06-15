@@ -317,4 +317,4 @@ app.post('/api/news', upload.array('gallery-images'), (req, res) => {
     });
 });
 
-startServer(kontrastorenburg.ru);
+startServer();
