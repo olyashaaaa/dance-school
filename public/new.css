@@ -294,17 +294,17 @@ background: linear-gradient(135deg, #B22053 0%, #8E8585 100%);
         
         .award-title {
             margin-top: 0;
-            color: #2c3e50;
+            color: #bb4b73;
         }
         
         .award-event {
             font-weight: bold;
-            color: #4a6fa5;
+            color: #B22053;
             margin-bottom: 10px;
         }
         
         .award-date {
-            color: #7f8c8d;
+            color: #B22053;
             font-size: 0.9em;
             margin-bottom: 15px;
         }
@@ -331,7 +331,7 @@ background: linear-gradient(135deg, #B22053 0%, #8E8585 100%);
         }
         
         .filter-btn:hover, .filter-btn.active {
-            background-color: #4a6fa5;
+            background-color: #B22053;
             color: white;
         }
         

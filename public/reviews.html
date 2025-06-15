@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<adahtml lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -302,9 +302,9 @@
             text-align: center;
             margin-top: 5px;
         }
-        @media (max-width: 375px) {
+       @media (max-width: 480px) {
   .reviews-page {
-    padding: 60px 15px 30px 15px;
+    padding: 60px 15px 30px;
   }
 
   .reviews-header h1 {
@@ -350,12 +350,14 @@
     line-height: 1.5;
   }
 
-  /* Кнопка добавить отзыв */
+  /* Кнопка "Добавить отзыв" */
   .add-review-btn {
+    position: fixed;     /* фиксируем кнопку */
+    bottom: 80px;        /* подняли выше */
+    right: 20px;
     padding: 12px 20px;
     font-size: 1em;
-    bottom: 20px;
-    right: 20px;
+    z-index: 1001;
   }
 
   /* Модальное окно */
@@ -395,6 +397,7 @@
     font-size: 0.8em;
   }
 }
+
 
     </style>
 </head>
@@ -703,4 +706,4 @@
         }
     </script>
 </body>
-</html> 
+</adahtml> 

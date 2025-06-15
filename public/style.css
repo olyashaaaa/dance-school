@@ -199,7 +199,7 @@ color: black;
     flex-direction: column;
     gap: 20px;
     background-image: url(img/DSC_0335\ \(2\)-105\ 1.svg);
-    background-size: 100%;
+
     background-repeat: no-repeat;
     min-height: 560px;
     align-items: center;
@@ -884,8 +884,13 @@ height: 150px;
   /* ---------- HERO ---------- */
   .hero {
     padding: 0 20px;
-    background-size: cover;
     text-align: center;
+    /* заставляем фон заполнять весь блок */
+    background-size: cover;
+    /* смещаем фон вверх */
+    background-position: top center;
+    /* можно увеличить высоту блока, если нужно больше “вытягивания” */
+    height: 700px; /* подберите оптимальное значение */
   }
   .hero h1 {
     font-size: 1.2rem; /* ~19px */
@@ -928,37 +933,124 @@ height: 150px;
     width: 100%;
     height: auto;
   }
+.h11{
+   font-size: 3.12rem;
+   padding-left: 10px;
+}
 
+.h22{
+   font-size: 1.5rem;
+}
   /* ---------- RECORD ---------- */
-  .record {
-    padding: 40px 20px;
-    min-height: auto;
+  #applicationForm {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#applicationForm .labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+#applicationForm .label {
+  flex: 1 1 calc(50% - 16px);
+}
+
+#applicationForm .inp {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+#applicationForm .button {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#applicationForm .btn {
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+
+  #applicationForm {
+    padding: 10px;
   }
-  .button2 {
-    padding: 16px 32px;
-    font-size: 1.5rem; /* 24px */
+
+  /* Сбрасываем флекс-ряд, каждый .label на всю ширину */
+  #applicationForm .labels {
+    display: block;
   }
-  .h11 {
-    font-size: 2.25rem; /* 36px */
+
+  #applicationForm .label {
+    flex: none;
+    width: 100%;
+    margin-bottom: 12px;
   }
-  .h22 {
-    font-size: 1.25rem; /* 20px */
+
+  /* Кнопка тоже во всю ширину */
+  #applicationForm .button {
+    text-align: stretch;
   }
+
+  #applicationForm .btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+  }
+
+.modal-content {
+    width: 90%;           /* почти во всю ширину экрана */
+    margin: 40px auto;     /* уменьшить отступ сверху/снизу */
+    padding: 16px;
+  }
+
+  .modal .close {
+    top: 10px;
+    right: 12px;
+    font-size: 20px;
+  }
+
+  .price-block p strong,
+  .payment-info p strong,
+  .notes p strong {
+    font-size: 1.1em;      /* чуть крупнее ключевые слова */
+  }
+
+  .price-block p,
+  .payment-info p,
+  .notes p {
+    font-size: 0.95em;     /* немного уменьшить основной текст */
+  }
+
+  .price-block,
+  .payment-info,
+  .notes {
+    margin-bottom: 12px;
+  }
+
 
   /* ---------- TEACHER ---------- */
   .part {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+    
   }
   .fio {
     font-size: 1.75rem; /* 28px */
+    padding-left: 10px;
   }
   .job {
     font-size: 1.25rem; /* 20px */
+    padding-left: 10px;
   }
   .info_job {
     font-size: 1rem; /* 16px */
+    padding-left: 10px;
   }
 
   /* ---------- PRICING ---------- */
