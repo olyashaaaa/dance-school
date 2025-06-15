@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
-                const response = await fetch('/submit-review', {
+                const response = await fetch('https://kontrast56.ru/submit-review', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
