@@ -612,7 +612,6 @@
             const content = document.getElementById('news-content').value.trim();
             const highlights = document.getElementById('news-highlights').value.trim();
             const impressions = document.getElementById('news-impressions').value.trim();
-            const status = document.getElementById('news-status').value;
             const images = document.getElementById('news-images').files;
             
             // Проверка обязательных полей
@@ -629,7 +628,6 @@
             formData.append('content', content);
             if (highlights) formData.append('highlights', highlights);
             if (impressions) formData.append('impressions', impressions);
-            formData.append('status', status);
             
             // Добавляем изображения
             for (let i = 0; i < images.length; i++) {
