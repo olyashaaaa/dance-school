@@ -818,66 +818,99 @@ height: 150px;
       .firework:nth-child(8) { background: #a29bfe; }
 
 
-          
-/* ------------------- МОБИЛЬНАЯ ВЕРСИЯ ------------------- */
-@media only screen and (max-width: 375px) {
-  /* ====== ШАПКА ====== */
-  nav {
-    flex-direction: column;   /* шапка по вертикали */
-    align-items: center;      /* по центру по горизонтали */
-    margin: 10px 0;           /* убираем большие боковые отступы */
+ /* ========== ОБЩИЕ КЛЮЧЕВЫЕ КАДРЫ ========== */
+@keyframes slideInScale {
+  from {
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
   }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fireworkExplode {
+  from {
+    transform: translate(0,0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(var(--end-x,0), var(--end-y,0)) scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* ========== МОБИЛЬНАЯ ВЕРСИЯ (max-width: 480px) ========== */
+@media (max-width: 480px) {
+  /* ---------- ШАПКА ---------- */
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+  }
+
   .logo {
     margin-bottom: 10px;
   }
   .logo img {
     height: 40px;
+    width: auto;
   }
+
   nav ul {
-    display: flex;            /* вернуть flex-режим */
-    flex-direction: column;   /* вертикальный список */
+    display: flex;
+    flex-direction: column;
     align-items: center;
     width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
   }
   nav ul li {
-    margin: 8px 0;            /* отступ между пунктами */
     width: 100%;
-    text-align: center;       /* текст по центру */
+    margin: 8px 0;
+    text-align: center;
   }
   nav ul li a {
-    display: block;           /* чтобы width:100% срабатывал */
+    display: block;
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
+    text-decoration: none;
   }
 
-  /* ====== HERO ====== */
+  /* ---------- HERO ---------- */
   .hero {
-    padding-left: 20px;
+    padding: 0 20px;
     background-size: cover;
+    text-align: center;
   }
   .hero h1 {
-    font-size: 15px;
+    font-size: 1.2rem; /* ~19px */
+    margin: 10px 0;
   }
   .hero p {
-    font-size: 16px;
-    margin: 15px 0;
+    font-size: 1rem; /* 16px */
+    margin: 10px 0;
   }
   .hero .btn1 {
+    display: inline-block;
     padding: 12px 24px;
-    font-size: 14px;
+    font-size: 0.875rem; /* 14px */
   }
 
-  /* ====== INFO ====== */
+  /* ---------- INFO ---------- */
   .info {
-    display: flex;            /* вернуть flex-режим */
+    display: flex;
     flex-direction: column;
-    background-size: contain;
     padding: 20px;
+    background-size: contain;
   }
   .block_1,
   .block_2 {
-    display: flex;            /* вернуть flex-режим */
+    display: flex;
     flex-direction: column;
     gap: 30px;
     width: 100%;
@@ -886,116 +919,113 @@ height: 150px;
     max-width: 100%;
   }
   .h3 {
-    font-size: 24px;
+    font-size: 1.5rem; /* 24px */
   }
   .p {
-    font-size: 18px;
+    font-size: 1.125rem; /* 18px */
   }
-  .photo > img {
+  .photo img {
     width: 100%;
+    height: auto;
   }
 
-  /* ====== RECORD ====== */
+  /* ---------- RECORD ---------- */
   .record {
-    min-height: auto;
     padding: 40px 20px;
+    min-height: auto;
   }
   .button2 {
     padding: 16px 32px;
-    font-size: 24px;
+    font-size: 1.5rem; /* 24px */
   }
   .h11 {
-    font-size: 36px;
+    font-size: 2.25rem; /* 36px */
   }
   .h22 {
-    font-size: 20px;
+    font-size: 1.25rem; /* 20px */
   }
 
-  /* ====== TEACHER ====== */
+  /* ---------- TEACHER ---------- */
   .part {
-    display: flex;            /* вернуть flex-режим */
+    display: flex;
     flex-direction: column;
     gap: 20px;
   }
   .fio {
-    font-size: 28px;
+    font-size: 1.75rem; /* 28px */
   }
   .job {
-    font-size: 20px;
+    font-size: 1.25rem; /* 20px */
   }
   .info_job {
-    font-size: 16px;
+    font-size: 1rem; /* 16px */
   }
 
-  /* ====== PRICING ====== */
+  /* ---------- PRICING ---------- */
   .pricing {
-    padding-left: 20px;
+    padding: 0 20px;
   }
   .container h1,
   .card2 h1 {
-    font-size: 48px;
+    font-size: 3rem; /* 48px */
+    margin-bottom: 20px;
   }
   .cards,
   .price_cards {
-    display: flex;            /* вернуть flex-режим */
+    display: flex;
     flex-direction: column;
     gap: 15px;
   }
-  .card_pink {
+  .card_pink,
+  .price_card {
     width: 100%;
-    height: auto;
     padding: 8%;
+    box-sizing: border-box;
   }
-  .card_pink h2 {
-    font-size: 28px;
+  .card_pink h2,
+  .price_card h2 {
+    font-size: 1.75rem; /* 28px */
   }
   .card_pink p,
   .price_card p {
-    font-size: 18px;
-  }
-  .price_card {
-    width: 100%;
-  }
-  .price_card h2 {
-    font-size: 28px;
-  }
-  h1{
-    font-size: 55px;
+    font-size: 1.125rem; /* 18px */
   }
 
-  /* ====== REVIEWS ====== */
+  /* Общий стиль заголовков h1 на мобилке */
+  h1 {
+    font-size: 3.5rem; /* 55px */
+  }
+
+  /* ---------- REVIEWS ---------- */
   .reviews-container {
-    display: flex;            /* вернуть flex-режим */
+    display: flex;
     flex-direction: column;
+    gap: 20px;
   }
   .review {
     width: 100%;
     max-width: none;
   }
 
-  /* ====== FOOTER ====== */
+  /* ---------- FOOTER ---------- */
   .footer {
-    display: flex;            /* вернуть flex-режим */
+    display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px;
     width: 100%;
     margin: 0;
-    padding: 20px;
   }
   .footer-left,
   .footer-center,
   .footer-right {
+    width: 100%;
     text-align: center;
     margin-bottom: 20px;
-    width: 100%;
-  }
-  .footer-center {
-    margin-top: 0;
   }
 
-  /* ====== ОВЕРЛЕЙ, УСПЕШНОЕ УВЕДОМЛЕНИЕ, ФЕЙЕРВЕРКИ ====== */
-  .overlay,
-  .overlay.show {
+  /* ---------- ОВЕРЛЕЙ И УВЕДОМЛЕНИЯ ---------- */
+  .overlay {
     display: none;
   }
   .overlay.show {
@@ -1010,11 +1040,11 @@ height: 150px;
     width: 90%;
     max-width: 320px;
     padding: 20px;
-    display: none;
     border-radius: 16px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-    background: #ffffff;
+    background: #fff;
     z-index: 10000;
+    display: none;
     animation: slideInScale 0.4s ease-out forwards;
   }
   .success-notification.show {
@@ -1027,7 +1057,7 @@ height: 150px;
   }
   .success-notification p {
     font-size: 1em;
-    color: #666666;
+    color: #666;
     margin-bottom: 24px;
     line-height: 1.4;
   }
@@ -1044,17 +1074,8 @@ height: 150px;
     transform: translateY(-1px);
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
   }
-  @keyframes slideInScale {
-    0% {
-      transform: translate(-50%, -50%) scale(0.5);
-      opacity: 0;
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
-    }
-  }
 
+  /* ---------- FIREWORKS ---------- */
   .fireworks {
     display: none;
   }
@@ -1065,15 +1086,5 @@ height: 150px;
     width: 4px;
     height: 4px;
     animation: fireworkExplode 1.2s ease-out forwards;
-  }
-  @keyframes fireworkExplode {
-    0% {
-      transform: translate(0,0) scale(1);
-      opacity: 1;
-    }
-    100% {
-      transform: translate(var(--end-x,0), var(--end-y,0)) scale(0.3);
-      opacity: 0;
-    }
   }
 }

@@ -245,7 +245,8 @@ height: 150px;
     color: black;
     }
 
-@media (max-width: 375px) {
+/* Вместо max-width: 375px ставим max-width: 480px */
+@media (max-width: 480px) {
   /* Общие правки */
   * {
     font-size: 14px;
@@ -257,6 +258,7 @@ height: 150px;
 
   /* Навигация */
   nav {
+    display: flex;
     flex-direction: column;
     align-items: center;
     margin: 10px 16px;
@@ -312,6 +314,7 @@ height: 150px;
 
   /* Футер — вертикальная колонка */
   .footer {
+    display: flex;
     flex-direction: column;
     align-items: center;
     width: auto;
@@ -331,6 +334,7 @@ height: 150px;
     height: auto;
   }
   .footer-content ul {
+    display: flex;
     flex-direction: column;
     gap: 5px;
     margin: 10px 0 0;
@@ -342,6 +346,7 @@ height: 150px;
     margin-top: 0;
   }
   .footer-center .social-media {
+    display: flex;
     justify-content: center;
   }
 

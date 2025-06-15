@@ -232,106 +232,136 @@ height: 150px;
     }
 
 
-@media (max-width: 375px) {
-  /* ===== ШАПКА ===== */
-  nav {
-    flex-direction: column;   /* шапка по вертикали */
-    align-items: center;      /* по центру по горизонтали */
-    margin: 10px 0;           /* убираем большие боковые отступы */
+@media only screen and (max-width: 480px) {
+  /* Общие сбросы */
+  html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  *, *::before, *::after {
+    box-sizing: inherit;
   }
 
-  /* Логотип отдельно сверху */
+  /* ===== ШАПКА ===== */
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+    padding: 0 16px;
+  }
   .logo {
     margin-bottom: 10px;
   }
   .logo img {
     height: 40px;
+    width: auto;
   }
-
-  /* Список ссылок делаем вертикальным, центрируем */
   nav ul {
-    display: flex;            /* обязательно вернуть flex! */
-    flex-direction: column;
+    display: flex;             /* flex-режим включён */
+    flex-direction: column;    /* вертикальный список */
     align-items: center;
     width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    gap: 8px;
   }
   nav ul li {
-    margin: 8px 0;            /* отступ между пунктами */
     width: 100%;
-    text-align: center;       /* текст по центру */
+    text-align: center;
   }
   nav ul li a {
-    display: block;           /* чтобы width:100% срабатывал */
+    display: block;
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
+    text-decoration: none;
   }
 
   /* ===== ЗАГОЛОВКИ ===== */
   h1 {
-    font-size: 24px;
-    margin-top: 12px;
+    font-size: 1.5rem; /* ~24px */
+    margin: 12px 0;
     padding: 0 16px;
   }
   h2 {
-    font-size: 20px;
-    margin-top: 12px;
+    font-size: 1.25rem; /* ~20px */
+    margin: 12px 0;
     padding: 0 16px;
   }
 
   /* ===== БЛОК TEACHER / PART ===== */
   .teacher {
-    padding: 20px 16px;
-    gap: 24px;
-  }
-  .part {
-    display: flex;            /* вернуть flex-режим */
+    display: flex;
     flex-direction: column;
     gap: 24px;
+    padding: 20px 16px;
   }
-  .photo_t > img {
+  .part {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .photo_t img {
     width: 100%;
     height: auto;
+    border-radius: 8px;
   }
   .info_part {
-    max-width: 100%;
+    width: 100%;
     padding: 0 16px;
   }
-
-  /* Тексты и фамилии уменьшаем */
   .fio {
-    font-size: 32px;
+    font-size: 2rem;  /* ~32px */
+    margin: 8px 0;
   }
   .job {
-    font-size: 24px;
+    font-size: 1.5rem; /* ~24px */
+    margin: 4px 0;
   }
   .info_job {
-    font-size: 18px;
+    font-size: 1.125rem; /* ~18px */
+    margin: 4px 0;
   }
 
   /* ===== ПОДВАЛ ===== */
   .footer {
-    display: flex;            /* вернуть flex-режим */
+    display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     margin: 0;
-    padding: 20px;
+    padding: 20px 16px;
+    background: #B22053;
+    color: #FFF;
+    gap: 16px;
   }
   .footer-left,
   .footer-center,
   .footer-right {
-    text-align: center;
-    margin-bottom: 20px;
     width: 100%;
+    text-align: center;
+    margin: 8px 0;
   }
-  .footer-center {
-    margin-top: 0;
+  .footer-content ul {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .footer-content li a {
+    color: #FFF;
+    text-decoration: none;
+    font-size: 0.9rem;
   }
 
-  /* ===== BODY BACKGROUND ===== */
+  /* ===== ФОНОВЫЙ КОНТЕЙНЕР ===== */
   body {
     background-size: cover;
     background-position: center;
   }
-} /* <-- закрываем @media */
+}

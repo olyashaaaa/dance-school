@@ -270,128 +270,170 @@ padding: 25px;
         }
 
         
-@media (max-width: 375px) {
-  /* Общие настройки */
-  body {
+/* ================= АДАПТИВ ДЛЯ ЭКРАНОВ ДО 480px ================= */
+@media (max-width: 480px) {
+  /* —— ГЛОБАЛЬНЫЕ СБРОСЫ —— */
+  html, body {
+    margin: 0;
     padding: 0 10px;
+    box-sizing: border-box;
   }
-  * {
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+  body {
     font-size: 14px;
+    line-height: 1.4;
   }
 
-  /* Навигация */
+  /* —— НАВИГАЦИЯ —— */
   nav {
-    flex-direction: column;   /* шапка по вертикали */
-    align-items: center;      /* по центру по горизонтали */
-    margin: 10px 0;           /* убираем большие боковые отступы */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+    padding: 0;
   }
   .logo {
     margin-bottom: 10px;
   }
   .logo img {
     height: 40px;
+    width: auto;
   }
   nav ul {
-    display: flex;            /* вернуть flex-режим */
-    flex-direction: column;   /* вертикальный список */
+    display: flex;
+    flex-direction: column;
     align-items: center;
     width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    gap: 8px;
   }
   nav ul li {
-    margin: 8px 0;            /* отступ между пунктами */
     width: 100%;
-    text-align: center;       /* текст по центру */
+    text-align: center;
   }
   nav ul li a {
-    display: block;           /* чтобы width:100% срабатывал */
+    display: block;
     width: 100%;
     padding: 10px 0;
     font-size: 16px;
+    text-decoration: none;
   }
 
-  /* Контейнер */
+  /* —— КОНТЕЙНЕР —— */
   .container {
+    width: 100%;
     padding: 0;
     margin: 0 auto;
-    width: 100%;
   }
 
-  /* Шапка группы */
+  /* —— ШАПКА ГРУППЫ —— */
   .group-header {
-    padding: 50px 15px;
+    padding: 40px 15px;
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    text-align: center;
   }
   .group-title {
-    font-size: 2rem;
+    font-size: 1.8rem;  /* ~28px */
+    margin: 0 0 10px;
   }
   .group-subtitle {
-    font-size: 1rem;
+    font-size: 1rem;    /* 16px */
+    margin: 0 auto 15px;
     max-width: 100%;
   }
   .group-badge {
+    display: inline-block;
     padding: 6px 20px;
     font-size: 0.9rem;
+    border-radius: 20px;
   }
 
-  /* Основной контент – одна колонка */
+  /* —— КОНТЕНТ ГРУППЫ —— */
   .group-content {
     display: block;
   }
-
-  /* Секции */
   .group-section {
-    padding: 25px;
-    margin-bottom: 20px;
+    padding: 20px 0;
+    margin: 0;
+    border-bottom: 1px solid #eee;
   }
   .section-title {
-    font-size: 1.4rem;
+    font-size: 1.4rem;  /* ~22px */
+    margin-bottom: 8px;
   }
   .group-description {
     font-size: 1rem;
   }
 
-  /* Участники */
+  /* —— УЧАСТНИКИ —— */
   .members-grid {
+    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 15px;
   }
   .member-photo {
+    width: 100%;
     height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
   }
   .member-name {
     font-size: 0.95rem;
+    margin: 5px 0 0;
   }
   .member-age {
     font-size: 0.8rem;
+    color: #666;
   }
 
-  /* Сайдбар прячем */
+  /* —— САЙДБАР —— */
   .sidebar-card {
     display: none;
   }
 
-  /* Расписание */
+  /* —— РАСПИСАНИЕ —— */
+  .schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
   .schedule-item {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 8px 0;
+    border-bottom: 1px solid #ddd;
   }
   .schedule-time {
-    margin-top: 4px;
+    font-weight: bold;
+    margin-bottom: 4px;
   }
 
-  /* Галерея – две колонки */
+  /* —— ГАЛЕРЕЯ —— */
   .gallery-grid {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
   .gallery-item {
+    width: 100%;
     height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
   }
 
-  /* Кнопки */
+  /* —— КНОПКИ —— */
   .btn {
+    display: inline-block;
     font-size: 0.95rem;
     padding: 10px 20px;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
   }
 }
